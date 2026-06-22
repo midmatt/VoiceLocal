@@ -1,0 +1,213 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  /* Colors */
+  --color-background: #080810;
+  --color-surface: #0f0f1a;
+  --color-card: #13131f;
+  --color-surface-alt: #0d0d1a;
+  --color-border: rgba(91, 110, 245, 0.2);
+  --color-border-subtle: rgba(91, 110, 245, 0.15);
+  --color-border-medium: rgba(91, 110, 245, 0.3);
+  --color-border-strong: rgba(91, 110, 245, 0.4);
+  --color-primary: #5b6ef5;
+  --color-primary-hover: #4a5ce0;
+  --color-primary-muted: rgba(91, 110, 245, 0.12);
+  --color-accent: #a78bfa;
+  --color-text-primary: #e8e8f4;
+  --color-text-secondary: #8b8fb8;
+  --color-text-muted: #4a4a6a;
+  --color-success: #4ade80;
+
+  /* Typography */
+  --font-hero-size: 4.5rem;
+  --font-hero-size-mobile: 2.625rem;
+  --font-hero-weight: 700;
+  --font-hero-line-height: 1.1;
+  --font-section-size: 3rem;
+  --font-section-size-mobile: 2rem;
+  --font-section-weight: 600;
+  --font-body-size: 1.125rem;
+  --font-body-size-mobile: 1rem;
+  --font-body-weight: 400;
+  --font-body-line-height: 1.7;
+  --font-caption-size: 0.8125rem;
+  --font-caption-weight: 500;
+  --font-caption-letter-spacing: 0.09375rem;
+
+  /* Components */
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --button-height: 52px;
+  --button-font-size: 1rem;
+  --button-font-weight: 600;
+  --section-padding-y: 120px;
+  --section-padding-y-mobile: 80px;
+  --max-content-width: 1100px;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-size: var(--font-body-size-mobile);
+    font-weight: var(--font-body-weight);
+    line-height: var(--font-body-line-height);
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: var(--font-body-size);
+    }
+  }
+}
+
+@keyframes voicebar {
+  from {
+    transform: scaleY(0.15);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.waveform-container {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 20px 32px;
+  background: rgba(15, 15, 26, 0.8);
+  border: 1px solid rgba(91, 110, 245, 0.25);
+  border-radius: 20px;
+}
+
+.waveform-bar {
+  width: 6px;
+  border-radius: 3px;
+  transform-origin: bottom;
+  background: linear-gradient(to top, #5b6ef5, #a78bfa);
+}
+
+/* ── Hero cursor blink ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #5b6ef5;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Recording dot pulse ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.8); }
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+/* ── Waveform override inside card ── */
+.waveform-card-wrapper .waveform-container {
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ── Hero split layout ── */
+.hero-split {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: 100%;
+}
+
+.hero-left {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+.hero-right {
+  flex: 0 0 45%;
+  max-width: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Hero headline ── */
+.hero-headline {
+  display: block;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1.0;
+}
+
+.hero-headline--light {
+  color: #e8e8f4;
+}
+
+.hero-headline--accent {
+  color: #5b6ef5;
+  text-shadow: 0 0 40px rgba(91, 110, 245, 0.4);
+}
+
+/* ── Hero floating card ── */
+.hero-card {
+  background: #0f0f1a;
+  border: 1px solid rgba(91, 110, 245, 0.2);
+  border-radius: 24px;
+  padding: 32px;
+  transform: rotate(2deg);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(91, 110, 245, 0.1);
+  width: 100%;
+  max-width: 440px;
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .hero-split {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hero-left,
+  .hero-right {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-headline {
+    font-size: 52px;
+  }
+
+  .hero-card {
+    transform: none;
+    max-width: 100%;
+  }
+}
