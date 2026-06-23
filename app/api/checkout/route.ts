@@ -40,8 +40,15 @@ export async function POST() {
     })
 
     return Response.json({ url: session.url }, { headers: CORS_HEADERS })
-  } catch (error) {
-    console.error('Checkout session creation failed:', error)
+  } catch (error: unknown) {
+    const stripeError = error as { type?: string; code?: string; message?: string; statusCode?: number }
+    console.error('Checkout session creation failed:', {
+      message: stripeError.message,
+      type: stripeError.type,
+      code: stripeError.code,
+      statusCode: stripeError.statusCode,
+      raw: error,
+    })
     return Response.json(
       { error: 'Failed to create checkout session.' },
       { status: 500, headers: CORS_HEADERS },

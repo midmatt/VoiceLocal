@@ -47,7 +47,7 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className="px-6 py-20 md:py-[120px]">
+    <section id="pricing" className="px-6 py-16 md:py-[80px]">
       <div className="mx-auto max-w-[1100px]">
         <h2
           className="mb-12 text-center text-[2rem] font-semibold md:mb-16 md:text-[3rem]"
@@ -61,37 +61,64 @@ export default function Pricing() {
             className="rounded-2xl p-8 text-center"
             style={{
               background: '#13131f',
-              border: '1px solid rgba(91, 110, 245, 0.12)',
+              border: '1px solid rgba(91, 110, 245, 0.3)',
+              boxShadow:
+                '0 0 0 1px rgba(91, 110, 245, 0.3), 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(91, 110, 245, 0.08)',
             }}
           >
-            <p
-              className="mb-1 text-sm font-medium uppercase tracking-widest"
-              style={{ color: 'var(--color-text-secondary)' }}
+            <div
+              className="mb-2 flex items-center justify-center gap-3"
             >
-              Free Trial
-            </p>
+              <p
+                className="text-sm font-medium uppercase tracking-widest"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                Free Trial
+              </p>
+              <span
+                style={{ color: 'var(--color-text-muted)', fontSize: '20px' }}
+                aria-hidden
+              >
+                ↓
+              </span>
+            </div>
+
+            <div className="mb-2 flex items-center justify-center gap-2">
+              {/* Mini waveform SVG */}
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden
+              >
+                <rect x="1" y="5" width="2" height="6" rx="1" fill="#5B6EF5" />
+                <rect x="4.5" y="2" width="2" height="12" rx="1" fill="#5B6EF5" />
+                <rect x="8" y="4" width="2" height="8" rx="1" fill="#5B6EF5" />
+                <rect x="11.5" y="3" width="2" height="10" rx="1" fill="#5B6EF5" />
+              </svg>
+              <p
+                className="text-xl font-semibold"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
+                VoiceLocal
+              </p>
+            </div>
+
             <p
-              className="mb-2 text-2xl"
-              style={{ color: 'var(--color-text-muted)' }}
-              aria-hidden
-            >
-              ↓
-            </p>
-            <p
-              className="mb-1 text-xl font-semibold"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              VoiceLocal
-            </p>
-            <p
-              className="text-5xl font-bold"
-              style={{ color: 'var(--color-text-primary)' }}
+              className="font-extrabold"
+              style={{
+                color: 'var(--color-text-primary)',
+                fontSize: '56px',
+                fontWeight: 800,
+                lineHeight: 1.1,
+              }}
             >
               $25
             </p>
             <p
-              className="mb-8 text-sm"
-              style={{ color: 'var(--color-text-secondary)' }}
+              className="mb-8 text-sm font-medium"
+              style={{ color: '#5B6EF5' }}
             >
               one-time
             </p>
@@ -150,14 +177,25 @@ export default function Pricing() {
             </p>
           </div>
 
-          <p
-            className="mt-6 text-center text-[13px] leading-relaxed"
-            style={{ color: 'var(--color-text-muted)' }}
+          {/* Competitor comparison mini card */}
+          <div
+            className="mt-4 rounded-xl text-center"
+            style={{
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              borderRadius: '12px',
+              padding: '16px 24px',
+            }}
           >
-            VoiceType charges $8-12/month ($96-144/year).
-            <br />
-            VoiceLocal is $25. Once.
-          </p>
+            <p
+              className="text-[13px] leading-relaxed"
+              style={{ color: 'var(--color-text-muted)' }}
+            >
+              VoiceType charges $8-12/month ($96-144/year).
+              <br />
+              VoiceLocal is <span style={{ color: 'var(--color-text-secondary)' }}>$25. Once.</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>

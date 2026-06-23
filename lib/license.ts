@@ -10,6 +10,7 @@ export interface LicenseRecord {
   email: string
   sessionId: string
   createdAt: string
+  machines: string[]
 }
 
 export function generateLicenseKey(email: string): string {
@@ -57,6 +58,7 @@ export async function storeLicenseKey(
     email,
     sessionId,
     createdAt: new Date().toISOString(),
+    machines: [],
   }
 
   // Avoid double-writing if this Stripe session was already processed.

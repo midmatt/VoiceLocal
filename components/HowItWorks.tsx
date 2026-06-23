@@ -75,7 +75,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section className="px-6 py-20 md:py-[120px]">
+    <section className="px-6 py-16 md:py-[80px]">
       <div className="mx-auto max-w-[1100px]">
         <h2
           className="mb-12 text-center text-[2rem] font-semibold md:mb-16 md:text-[3rem]"
@@ -84,41 +84,72 @@ export default function HowItWorks() {
           Three keystrokes. Done.
         </h2>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {STEPS.map((step) => (
-            <article
-              key={step.number}
-              className="relative overflow-hidden rounded-2xl p-7"
-              style={{
-                background: '#13131f',
-                border: '1px solid rgba(91, 110, 245, 0.12)',
-              }}
-            >
-              <span
-                className="pointer-events-none absolute left-4 top-2 select-none text-[5rem] font-bold leading-none"
-                style={{ color: 'rgba(91, 110, 245, 0.2)' }}
-                aria-hidden
-              >
-                {step.number}
-              </span>
+        <div className="relative">
+          {/* Connecting line behind cards */}
+          <div
+            className="absolute left-0 right-0 top-1/2 hidden md:block"
+            style={{
+              height: '1px',
+              background: 'linear-gradient(90deg, transparent, #5B6EF5, transparent)',
+              transform: 'translateY(-50%)',
+            }}
+            aria-hidden
+          />
 
-              <div className="relative z-10 pt-10">
-                <div className="mb-4">{step.icon}</div>
-                <h3
-                  className="mb-3 text-lg font-semibold"
-                  style={{ color: 'var(--color-text-primary)' }}
+          <div className="relative grid gap-6 md:grid-cols-3">
+            {STEPS.map((step) => (
+              <article
+                key={step.number}
+                className="relative overflow-hidden rounded-2xl p-7"
+                style={{
+                  background: '#13131f',
+                  border: '1px solid rgba(91, 110, 245, 0.12)',
+                }}
+              >
+                {/* Step number watermark */}
+                <span
+                  className="pointer-events-none absolute select-none font-bold leading-none"
+                  style={{
+                    color: 'rgba(91, 110, 245, 0.15)',
+                    fontSize: '120px',
+                    left: '-8px',
+                    top: '-20px',
+                  }}
+                  aria-hidden
                 >
-                  {step.title}
-                </h3>
-                <p
-                  className="text-[15px] leading-[1.7]"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {step.body}
-                </p>
-              </div>
-            </article>
-          ))}
+                  {step.number}
+                </span>
+
+                <div className="relative z-10 pt-10">
+                  {/* Icon with circle background */}
+                  <div
+                    className="mb-4 flex items-center justify-center"
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '50%',
+                      background: 'rgba(91, 110, 245, 0.12)',
+                      border: '1px solid rgba(91, 110, 245, 0.2)',
+                    }}
+                  >
+                    {step.icon}
+                  </div>
+                  <h3
+                    className="mb-3 text-lg font-semibold"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    className="text-[15px] leading-[1.7]"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    {step.body}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

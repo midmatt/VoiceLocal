@@ -53,8 +53,15 @@ export default function FAQ() {
   }
 
   return (
-    <section className="px-6 py-20 md:py-[120px]">
+    <section className="px-6 py-16 md:py-[80px]">
       <div className="mx-auto max-w-[800px]">
+        <h2
+          className="mb-12 text-center text-[2rem] font-bold md:text-[3rem]"
+          style={{ color: 'var(--color-text-primary)' }}
+        >
+          Everything you need to know
+        </h2>
+
         <div className="space-y-3">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openIndex === index
@@ -64,8 +71,10 @@ export default function FAQ() {
                 key={item.question}
                 className="overflow-hidden rounded-2xl"
                 style={{
-                  background: '#13131f',
+                  background: isOpen ? 'rgba(91, 110, 245, 0.04)' : '#13131f',
                   border: '1px solid rgba(91, 110, 245, 0.12)',
+                  borderLeft: isOpen ? '2px solid #5B6EF5' : '1px solid rgba(91, 110, 245, 0.12)',
+                  transition: 'background 200ms, border-left 200ms',
                 }}
               >
                 <button
@@ -98,8 +107,11 @@ export default function FAQ() {
                 >
                   <div className="overflow-hidden">
                     <p
-                      className="px-6 pb-5 text-[15px] leading-[1.7]"
-                      style={{ color: 'var(--color-text-secondary)' }}
+                      className="px-6 text-[15px] leading-[1.7]"
+                      style={{
+                        color: '#8b8fb8',
+                        padding: '0 24px 16px 24px',
+                      }}
                     >
                       {item.answer}
                     </p>

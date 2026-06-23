@@ -8,13 +8,38 @@ import Footer from '@/components/Footer'
 function PrivacySection() {
   return (
     <section
-      className="px-6 py-20 md:py-[120px]"
-      style={{ background: '#0d0d1a' }}
+      className="relative px-6 py-20 md:py-[80px]"
+      style={{
+        background: 'linear-gradient(135deg, #0d0d1a 0%, #0f0f24 100%)',
+        borderTop: '1px solid rgba(91, 110, 245, 0.1)',
+        borderBottom: '1px solid rgba(91, 110, 245, 0.1)',
+        overflow: 'hidden',
+      }}
     >
-      <div className="mx-auto flex max-w-[1100px] flex-col items-center text-center">
+      {/* Blurred purple circle */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '500px',
+          height: '500px',
+          background: 'rgba(91, 110, 245, 0.06)',
+          filter: 'blur(100px)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div className="relative z-10 mx-auto flex max-w-[1100px] flex-col items-center text-center">
         <h2
-          className="mb-8 text-[2.625rem] font-bold md:text-[4.5rem]"
-          style={{ color: '#5B6EF5' }}
+          className="mb-8 text-[2.625rem] font-bold md:text-[4rem]"
+          style={{
+            color: '#5B6EF5',
+            textShadow: '0 0 60px rgba(91, 110, 245, 0.3)',
+          }}
         >
           &ldquo;Your voice is yours.&rdquo;
         </h2>
@@ -33,9 +58,11 @@ function PrivacySection() {
             (label) => (
               <span
                 key={label}
-                className="inline-flex items-center rounded-full px-4 py-1.5 text-[13px]"
+                className="inline-flex items-center rounded-full"
                 style={{
-                  background: 'rgba(91, 110, 245, 0.12)',
+                  padding: '8px 20px',
+                  fontSize: '14px',
+                  background: 'rgba(91, 110, 245, 0.1)',
                   border: '1px solid rgba(91, 110, 245, 0.3)',
                   color: '#8b8fdb',
                 }}

@@ -1,3 +1,5 @@
+'use client'
+
 const FEATURES = [
   {
     icon: '🔒',
@@ -33,23 +35,41 @@ const FEATURES = [
 
 export default function Features() {
   return (
-    <section className="px-6 py-20 md:py-[120px]">
+    <section className="px-6 py-16 md:py-[80px]">
       <div className="mx-auto max-w-[1100px]">
-        <h2
-          className="mb-12 text-center text-[2rem] font-semibold md:mb-16 md:text-[3rem]"
-          style={{ color: 'var(--color-text-primary)' }}
-        >
-          Built for people who can&apos;t afford leaks.
-        </h2>
+        <div className="mb-12 md:mb-16">
+          <p
+            className="mb-3 text-[11px] font-semibold uppercase tracking-[3px]"
+            style={{ color: '#5B6EF5' }}
+          >
+            Why VoiceLocal
+          </p>
+          <h2
+            className="text-[2rem] font-semibold md:text-[3rem]"
+            style={{ color: 'var(--color-text-primary)' }}
+          >
+            Built for people who can&apos;t afford leaks.
+          </h2>
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature) => (
             <article
               key={feature.title}
-              className="rounded-2xl p-7"
+              className="rounded-2xl p-7 transition-colors duration-200"
               style={{
                 background: '#13131f',
-                border: '1px solid rgba(91, 110, 245, 0.12)',
+                border: '1px solid rgba(91, 110, 245, 0.2)',
+                borderTop: '2px solid rgba(91, 110, 245, 0.4)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(91, 110, 245, 0.4)'
+                e.currentTarget.style.background = '#16162a'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(91, 110, 245, 0.2)'
+                e.currentTarget.style.borderTop = '2px solid rgba(91, 110, 245, 0.4)'
+                e.currentTarget.style.background = '#13131f'
               }}
             >
               <div
