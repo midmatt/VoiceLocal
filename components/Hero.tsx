@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import WaveformAnimation from '@/components/WaveformAnimation'
+import { PurchaseAgreementCheckbox } from '@/components/LegalAgreementCheckbox'
 
 const TRUST_BADGES = [
   { icon: '🔒', text: 'Zero data sent' },
@@ -14,8 +15,13 @@ const TRUST_BADGES = [
 export default function Hero() {
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
+  const [purchaseAgreed, setPurchaseAgreed] = useState(false)
 
-  async function handleBuyNow() {
+  async function handleBuyNow(e?: React.MouseEvent) {
+    if (!purchaseAgreed) {
+      e?.preventDefault()
+      return
+    }
     setCheckoutLoading(true)
     setCheckoutError(null)
 
@@ -95,16 +101,17 @@ export default function Hero() {
           <button
             type="button"
             onClick={handleBuyNow}
-            disabled={checkoutLoading}
+            disabled={!purchaseAgreed || checkoutLoading}
+            aria-disabled={!purchaseAgreed || checkoutLoading}
             style={{
               color: '#e8e8f4',
               fontSize: '14px',
               fontWeight: 500,
               background: 'none',
               border: 'none',
-              cursor: checkoutLoading ? 'not-allowed' : 'pointer',
+              cursor: !purchaseAgreed || checkoutLoading ? 'not-allowed' : 'pointer',
               padding: 0,
-              opacity: checkoutLoading ? 0.6 : 1,
+              opacity: !purchaseAgreed || checkoutLoading ? 0.6 : 1,
             }}
           >
             {checkoutLoading ? 'Redirecting…' : 'Buy — $25'}
@@ -215,7 +222,14 @@ export default function Hero() {
                 your words appear in any app instantly.
               </p>
 
-              {/* CTA row */}
+              {/* Purchase agreement + CTA row */}
+              <PurchaseAgreementCheckbox
+                id="hero-purchase-agreement"
+                checked={purchaseAgreed}
+                onChange={setPurchaseAgreed}
+                className="mb-4"
+              />
+
               <div
                 style={{
                   display: 'flex',
@@ -246,7 +260,8 @@ export default function Hero() {
                 <button
                   type="button"
                   onClick={handleBuyNow}
-                  disabled={checkoutLoading}
+                  disabled={!purchaseAgreed || checkoutLoading}
+                  aria-disabled={!purchaseAgreed || checkoutLoading}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -259,8 +274,8 @@ export default function Hero() {
                     fontWeight: 600,
                     fontSize: '16px',
                     border: '1px solid rgba(91,110,245,0.4)',
-                    cursor: checkoutLoading ? 'not-allowed' : 'pointer',
-                    opacity: checkoutLoading ? 0.6 : 1,
+                    cursor: !purchaseAgreed || checkoutLoading ? 'not-allowed' : 'pointer',
+                    opacity: !purchaseAgreed || checkoutLoading ? 0.6 : 1,
                     whiteSpace: 'nowrap',
                   }}
                 >

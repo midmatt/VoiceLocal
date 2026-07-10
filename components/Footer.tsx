@@ -50,7 +50,7 @@ export default function Footer() {
               { label: 'Buy Now', href: '/#pricing' },
               { label: 'Privacy Policy', href: '/privacy' },
               { label: 'Terms of Service', href: '/terms' },
-              { label: 'Refund Policy', href: '/refund' },
+              { label: 'Refund Policy', href: '/refund-policy' },
             ].map((link) => (
               <Link
                 key={link.label}

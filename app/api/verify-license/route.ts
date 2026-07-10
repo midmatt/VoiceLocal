@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       email?: unknown
       machine_id?: unknown
     }
-    const key = typeof body.key === 'string' ? body.key.trim() : ''
+    const key = typeof body.key === 'string' ? body.key.trim().toUpperCase() : ''
     const email = typeof body.email === 'string' ? body.email.trim() : ''
     const machineId = typeof body.machine_id === 'string' ? body.machine_id.trim() : ''
 
@@ -81,8 +81,8 @@ export async function POST(req: Request) {
 
     const license = licenses.find(
       (l: any) =>
-        l.key === key.toUpperCase() &&
-        l.email.toLowerCase() === email.toLowerCase(),
+        String(l.key).toUpperCase() === key &&
+        String(l.email).toLowerCase() === email.toLowerCase(),
     )
 
     if (!license) {
@@ -100,7 +100,7 @@ export async function POST(req: Request) {
       return Response.json(
         {
           valid: false,
-          reason: `This license is already activated on ${MAX_MACHINES_PER_LICENSE} Macs. Deactivate one to continue.`,
+          reason: 'License already activated on 2 Macs. Deactivate one first.',
         },
         { headers: CORS_HEADERS },
       )

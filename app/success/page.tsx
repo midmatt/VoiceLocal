@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { getStripe } from '@/lib/stripe'
+import { DOWNLOAD_URL } from '@/lib/constants'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -68,12 +68,12 @@ export default async function SuccessPage({
           )}
         </p>
 
-        <Link
-          href="/download"
+        <a
+          href={DOWNLOAD_URL}
           className="inline-flex h-[52px] w-full items-center justify-center rounded-xl bg-[#5B6EF5] px-8 text-base font-semibold text-white transition-colors hover:bg-[#4a5ce0] sm:w-auto"
         >
           Download VoiceLocal
-        </Link>
+        </a>
 
         <p
           className="mt-6 text-[13px]"

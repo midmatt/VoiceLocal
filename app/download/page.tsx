@@ -1,12 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Download VoiceLocal — Private Voice Dictation for Mac',
-  description:
-    'Download VoiceLocal for Mac. Private, offline voice dictation powered by Whisper AI. 7-day free trial, no payment required.',
-}
+import { useState } from 'react'
+import { DOWNLOAD_URL, CHROME_EXTENSION_STATUS, CHROME_EXTENSION_URL } from '@/lib/constants'
+import { TrialAgreementCheckbox } from '@/components/LegalAgreementCheckbox'
 
 const REQUIREMENTS = [
   { label: 'OS', value: 'macOS 13 (Ventura) or later' },
@@ -16,6 +14,27 @@ const REQUIREMENTS = [
 ]
 
 export default function DownloadPage() {
+  const [agreed, setAgreed] = useState(false)
+
+  const chromeIsLive = CHROME_EXTENSION_STATUS === 'live'
+  const chromeBlocked = !chromeIsLive || !agreed
+
+  function handleMacDownload(e: React.MouseEvent<HTMLButtonElement>) {
+    if (!agreed) {
+      e.preventDefault()
+      return
+    }
+    window.location.assign(DOWNLOAD_URL)
+  }
+
+  function handleChromeDownload(e: React.MouseEvent<HTMLButtonElement>) {
+    if (chromeBlocked) {
+      e.preventDefault()
+      return
+    }
+    window.open(CHROME_EXTENSION_URL, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <>
       {/* Nav */}
@@ -83,37 +102,124 @@ export default function DownloadPage() {
               className="text-[15px]"
               style={{ color: '#8b8fb8' }}
             >
-              Version 0.1.0 &middot; macOS 13+ &middot; Apple Silicon
+              Mac app &middot; Version 0.1.0 &middot; Chrome extension
             </p>
           </div>
 
-          {/* Download button */}
-          <div className="mb-10 flex justify-center">
-            <a
-              href="https://github.com/matthewvella/voicelocal/releases/latest/download/VoiceLocal.dmg"
-              className="inline-flex h-[56px] items-center justify-center rounded-xl bg-[#5B6EF5] px-10 text-base font-semibold text-white transition-colors hover:bg-[#4a5ce0]"
-              style={{
-                boxShadow: '0 0 40px rgba(91, 110, 245, 0.2)',
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                style={{ marginRight: '10px' }}
-                aria-hidden
-              >
-                <path
-                  d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Download for Mac (Apple Silicon)
-            </a>
+          {/* Agreement + Downloads */}
+          <div className="mb-10">
+            <div style={{ maxWidth: '440px', margin: '0 auto 20px' }}>
+              <TrialAgreementCheckbox
+                id="trial-agreement"
+                checked={agreed}
+                onChange={setAgreed}
+              />
+            </div>
+
+            <div className="mx-auto flex max-w-[440px] flex-col gap-4">
+              {/* Mac app */}
+              <div>
+                <p
+                  className="mb-2 text-center text-[12px] font-medium uppercase tracking-wider"
+                  style={{ color: '#4a4a6a' }}
+                >
+                  Mac app
+                </p>
+                <button
+                  type="button"
+                  disabled={!agreed}
+                  aria-disabled={!agreed}
+                  onClick={handleMacDownload}
+                  className="inline-flex h-[56px] w-full items-center justify-center rounded-xl px-6 text-base font-semibold text-white transition-all disabled:cursor-not-allowed"
+                  style={{
+                    background: agreed ? '#5B6EF5' : 'rgba(91, 110, 245, 0.3)',
+                    boxShadow: agreed ? '0 0 40px rgba(91, 110, 245, 0.2)' : 'none',
+                    opacity: agreed ? 1 : 0.5,
+                  }}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    style={{ marginRight: '10px' }}
+                    aria-hidden
+                  >
+                    <path
+                      d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  Download for Mac (Apple Silicon)
+                </button>
+                <p
+                  className="mt-2 text-center text-[13px]"
+                  style={{ color: '#4a4a6a' }}
+                >
+                  macOS 13+ &middot; Apple Silicon
+                </p>
+              </div>
+
+              {/* Chrome extension */}
+              <div>
+                <p
+                  className="mb-2 text-center text-[12px] font-medium uppercase tracking-wider"
+                  style={{ color: '#4a4a6a' }}
+                >
+                  Chrome extension
+                </p>
+                <button
+                  type="button"
+                  disabled={chromeBlocked}
+                  aria-disabled={chromeBlocked}
+                  onClick={handleChromeDownload}
+                  className="inline-flex h-[56px] w-full items-center justify-center rounded-xl px-6 text-base font-semibold text-white transition-all disabled:cursor-not-allowed"
+                  style={{
+                    background:
+                      chromeIsLive && agreed
+                        ? '#5B6EF5'
+                        : 'rgba(91, 110, 245, 0.3)',
+                    boxShadow:
+                      chromeIsLive && agreed
+                        ? '0 0 40px rgba(91, 110, 245, 0.2)'
+                        : 'none',
+                    opacity: chromeIsLive && agreed ? 1 : 0.5,
+                  }}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    style={{ marginRight: '10px', flexShrink: 0 }}
+                    aria-hidden
+                  >
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+                    <path
+                      d="M12 3v3M12 18v3M3 12h3M18 12h3"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  {chromeIsLive
+                    ? 'Add to Chrome'
+                    : 'Chrome Extension — Pending Chrome Web Store Review'}
+                </button>
+                <p
+                  className="mt-2 text-center text-[13px]"
+                  style={{ color: '#4a4a6a' }}
+                >
+                  {chromeIsLive
+                    ? 'Required for browser dictation — opens Chrome Web Store'
+                    : 'Submitted for review — will be available here once approved'}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* System requirements card */}

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { PurchaseAgreementCheckbox } from '@/components/LegalAgreementCheckbox'
 
 const FEATURES = [
   '7-day free trial, no card required',
@@ -15,8 +16,13 @@ const FEATURES = [
 export default function Pricing() {
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
+  const [purchaseAgreed, setPurchaseAgreed] = useState(false)
 
-  async function handleBuyNow() {
+  async function handleBuyNow(e?: React.MouseEvent) {
+    if (!purchaseAgreed) {
+      e?.preventDefault()
+      return
+    }
     setCheckoutLoading(true)
     setCheckoutError(null)
 
@@ -142,6 +148,13 @@ export default function Pricing() {
               ))}
             </ul>
 
+            <PurchaseAgreementCheckbox
+              id="pricing-purchase-agreement"
+              checked={purchaseAgreed}
+              onChange={setPurchaseAgreed}
+              className="mb-4 text-left"
+            />
+
             <div className="flex flex-col gap-3">
               <Link
                 href="/download"
@@ -152,7 +165,8 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={handleBuyNow}
-                disabled={checkoutLoading}
+                disabled={!purchaseAgreed || checkoutLoading}
+                aria-disabled={!purchaseAgreed || checkoutLoading}
                 className="inline-flex h-[52px] w-full items-center justify-center rounded-xl border border-[rgba(91,110,245,0.4)] bg-transparent px-8 text-base font-semibold text-[#e8e8f4] transition-colors hover:border-[rgba(91,110,245,0.6)] hover:bg-[rgba(91,110,245,0.08)] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {checkoutLoading ? 'Redirecting…' : 'Buy Now — $25'}
