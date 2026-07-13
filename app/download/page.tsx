@@ -86,7 +86,7 @@ export default function DownloadPage() {
             <div className="mb-6 flex justify-center">
               <Image
                 src="/logo.png"
-                alt="VoiceLocal"
+                alt="VoiceLocal app icon"
                 width={64}
                 height={64}
                 style={{ height: '64px', width: 'auto' }}

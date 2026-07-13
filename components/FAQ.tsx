@@ -1,8 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, type ReactNode } from 'react'
 
-const FAQ_ITEMS = [
+type FaqItem = {
+  question: string
+  answer: ReactNode
+}
+
+const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Does my audio ever leave my Mac?',
     answer:
@@ -40,10 +46,22 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Do you offer refunds?',
-    answer:
-      'Yes — 30-day no-questions-asked refund. Email hello@voicelocalapp.com.',
+    answer: (
+      <>
+        All sales are final — we don&apos;t offer refunds. Use the free trial to
+        evaluate VoiceLocal before buying. See our{' '}
+        <Link
+          href="/refund-policy"
+          className="underline underline-offset-2"
+          style={{ color: '#5B6EF5' }}
+        >
+          Refund Policy
+        </Link>{' '}
+        for full details.
+      </>
+    ),
   },
-] as const
+]
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)

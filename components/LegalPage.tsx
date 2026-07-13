@@ -69,7 +69,7 @@ export default function LegalPage({
           >
             {title}
           </h1>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+          <div dangerouslySetInnerHTML={{ __html: html }} className="legal-content__body" />
         </article>
       </main>
     </>

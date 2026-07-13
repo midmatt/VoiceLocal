@@ -212,9 +212,9 @@
   }
 }
 
-/* ── Legal / markdown content ── */
-.legal-content h1 {
-  display: none; /* page already has its own h1 */
+/* Hide duplicate markdown title — page renders its own h1 */
+.legal-content__body h1 {
+  display: none;
 }
 
 .legal-content h2 {

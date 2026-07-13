@@ -1,5 +1,15 @@
 import { getStripe } from '@/lib/stripe'
 import { DOWNLOAD_URL } from '@/lib/constants'
+import { pageMetadata } from '@/lib/seo'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = pageMetadata({
+  path: '/success',
+  title: 'Purchase Complete',
+  description:
+    'Your VoiceLocal license purchase is complete. Check your email for your license key and download the Mac app to get started.',
+  index: false,
+})
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'

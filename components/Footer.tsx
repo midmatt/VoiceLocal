@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { SUPPORT_EMAIL } from '@/lib/seo'
 
 export default function Footer() {
   return (
@@ -68,13 +69,13 @@ export default function Footer() {
           {/* Right: Contact */}
           <div className="md:text-right">
             <a
-              href="mailto:hello@voicelocalapp.com"
+              href={`mailto:${SUPPORT_EMAIL}`}
               className="transition-colors duration-200"
               style={{ color: '#8b8fb8', fontSize: '14px', textDecoration: 'none' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#e8e8f4' }}
               onMouseLeave={(e) => { e.currentTarget.style.color = '#8b8fb8' }}
             >
-              hello@voicelocalapp.com
+              {SUPPORT_EMAIL}
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { SUPPORT_EMAIL } from '@/lib/seo'
 
 let cached: Resend | null = null
 
@@ -14,7 +15,7 @@ function getResend(): Resend {
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL
   ? `VoiceLocal <${process.env.RESEND_FROM_EMAIL}>`
-  : 'VoiceLocal <hello@voicelocalapp.com>'
+  : `VoiceLocal <${SUPPORT_EMAIL}>`
 
 export async function sendLicenseEmail(email: string, licenseKey: string) {
   return getResend().emails.send({
@@ -40,7 +41,7 @@ export async function sendLicenseEmail(email: string, licenseKey: string) {
         </ol>
         <p style="color: #8b8fb8;">Works on up to 2 Macs. Need help? Reply to this email.</p>
         <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 32px 0;">
-        <p style="color: #4a4a6a; font-size: 13px; text-align: center;">VoiceLocal · voicelocalapp.com · 30-day refund guarantee</p>
+        <p style="color: #4a4a6a; font-size: 13px; text-align: center;">VoiceLocal · voicelocalapp.com · ${SUPPORT_EMAIL}</p>
       </div>
     `,
   })

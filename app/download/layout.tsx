@@ -1,15 +1,23 @@
 import type { Metadata } from 'next'
+import JsonLd from '@/components/JsonLd'
+import { pageMetadata, softwareApplicationJsonLd } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Download VoiceLocal — Private Voice Dictation for Mac',
+export const metadata: Metadata = pageMetadata({
+  path: '/download',
+  title: 'Download',
   description:
-    'Download VoiceLocal for Mac. Private, offline voice dictation powered by Whisper AI. 7-day free trial, no payment required.',
-}
+    'Download VoiceLocal for Mac (Apple Silicon) and the Chrome extension. Start a 7-day free trial—local Whisper transcription, no account required.',
+})
 
 export default function DownloadLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <JsonLd data={softwareApplicationJsonLd} />
+      {children}
+    </>
+  )
 }

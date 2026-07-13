@@ -4,6 +4,17 @@ import Features from '@/components/Features'
 import Pricing from '@/components/Pricing'
 import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
+import JsonLd from '@/components/JsonLd'
+import { pageMetadata, softwareApplicationJsonLd } from '@/lib/seo'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = pageMetadata({
+  path: '/',
+  title: 'VoiceLocal — Private Voice Dictation for Mac',
+  description:
+    'VoiceLocal is a local-first dictation app for Mac with a Chrome extension. Transcribe speech on-device with Whisper—no cloud, no subscription, $25 once.',
+  absoluteTitle: true,
+})
 
 function PrivacySection() {
   return (
@@ -80,6 +91,7 @@ function PrivacySection() {
 export default function Home() {
   return (
     <main>
+      <JsonLd data={softwareApplicationJsonLd} />
       <Hero />
       <HowItWorks />
       <Features />
