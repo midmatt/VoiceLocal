@@ -3,7 +3,7 @@ export const DOWNLOAD_URL =
 
 /** Chrome extension availability on /download.
  *  Change to 'live' once the Chrome Web Store listing is publicly approved. */
-export const CHROME_EXTENSION_STATUS = 'pending' as 'pending' | 'live'
+export const CHROME_EXTENSION_STATUS = 'live' as 'pending' | 'live'
 
 export const CHROME_EXTENSION_URL =
-  'https://chromewebstore.google.com/detail/adjaknlknkpidjllpeehnkbjcpjjljmj'
+  'https://chromewebstore.google.com/detail/knhdfomimdkigcgnjamodbcbfjnmncon?utm_source=item-share-cb'
